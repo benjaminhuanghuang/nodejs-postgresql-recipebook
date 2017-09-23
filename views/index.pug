@@ -14,9 +14,15 @@ block content
           p 
             strong Directions: 
             =r.directions
-          button.btn.btn-default
+          button.btn.btn-default.edit-recipe(
+          data-toggle="modal", 
+          data-target="#editFormModal",
+          data-id=r.id,
+          data-name=r.name,
+          data-ingredients=r.ingredients,
+          data-directions=r.directions)
             span.glyphicon.glyphicon-edit(aria-hidden="true")
-          button.btn.btn-danger
+          button.btn.btn-danger.delete-recipe
             span.glyphicon.glyphicon-remove(aria-hidden="true")
   //- Add Form Modal
   .modal.fade(id="formModal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
@@ -37,6 +43,30 @@ block content
             .form-group
               label Directions
               input.form-control(type="text" name="directions")
+          .modal-footer
+            botton.btn.btn-default(data-dismiss="modal") Close
+            input.btn.btn-primary(type="submit", value="Save")
+
+  //- Edit Form Modal
+  .modal.fade(id="editFormModal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+    .modal-dialog(role="document")
+      .modal-content
+        form(method="post" action="/edit")
+          input(type="hidden", id="edit-form-id" name="id")
+          .modal-header
+            botton.close(data-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") &times;
+            h4.modal-title(id="myModalLabel") Edit Recipe
+          .modal-body
+            .form-group
+              label Recipe Name
+              input.form-control(type="text" name="name" id="edit-form-name")
+            .form-group
+              label Ingredients
+              input.form-control(type="text" name="ingredients" id="edit-form-ingredients")
+            .form-group
+              label Directions
+              input.form-control(type="text" name="directions" id="edit-form-directions")
           .modal-footer
             botton.btn.btn-default(data-dismiss="modal") Close
             input.btn.btn-primary(type="submit", value="Save")
