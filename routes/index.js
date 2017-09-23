@@ -23,4 +23,15 @@ router.post("/add", (req, res, next) => {
   });
 });
 
+router.post("/edit", (req, res, next) => {
+  console.log("POST...");
+  db.query("UPDATE recipes set name=$1, ingredients=$2, directions=$3 WHERE id=$4", 
+    [req.body.name, req.body.ingredients, req.body.directions, req.body.id], (err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+
 module.exports = router;
