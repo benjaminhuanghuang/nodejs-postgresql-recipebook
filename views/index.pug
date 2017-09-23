@@ -22,7 +22,7 @@ block content
           data-ingredients=r.ingredients,
           data-directions=r.directions)
             span.glyphicon.glyphicon-edit(aria-hidden="true")
-          button.btn.btn-danger.delete-recipe
+          button.btn.btn-danger.delete-recipe(data-id=r.id)
             span.glyphicon.glyphicon-remove(aria-hidden="true")
   //- Add Form Modal
   .modal.fade(id="formModal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")

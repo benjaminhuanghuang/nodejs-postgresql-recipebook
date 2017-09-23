@@ -13,13 +13,23 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/add", (req, res, next) => {
-  console.log("POST...");
   db.query("INSERT INTO recipes(name, ingredients, directions) VALUES($1, $2, $3)", 
     [req.body.name, req.body.ingredients, req.body.directions], (err) => {
     if (err) {
       return next(err);
     }
     res.redirect("/");
+  });
+});
+
+router.delete("/delete/:id", (req, res, next) => {
+  db.query("DELETE FROM recipes WHERE id=$1", 
+    [req.params.id], (err) => {
+    if (err) {
+      return next(err);
+    }
+    //res.redirect("/");  // If use res.redirect(), get error: "DELETE http://localhost:8010/ 404 (Not Found)"
+    res.send(200);  
   });
 });
 

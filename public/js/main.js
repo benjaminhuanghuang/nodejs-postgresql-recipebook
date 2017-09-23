@@ -1,6 +1,7 @@
 $(document).ready(function() {
   $(".delete-recipe").on("click", function() {
     var id = $(this).data("id");
+    console.log("Log", id);
     var url = "/delete/" + id;
     if (confirm("Delete Recipe?")) {
       $.ajax({
@@ -17,10 +18,10 @@ $(document).ready(function() {
   });
 
   $(".edit-recipe").on("click", function() {
-    console.log($(this).data('name'));
-    $('#edit-form-name').val($(this).data('name'));
-    $('#edit-form-ingredients').val($(this).data('ingredients'));
-    $('#edit-form-directions').val($(this).data('directions'));
-    $('#edit-form-id').val($(this).data('id'));
+    console.log($(this).data("name"));
+    $("#edit-form-name").val($(this).data("name"));
+    $("#edit-form-ingredients").val($(this).data("ingredients"));
+    $("#edit-form-directions").val($(this).data("directions"));
+    $("#edit-form-id").val($(this).data("id"));
   });
 });
