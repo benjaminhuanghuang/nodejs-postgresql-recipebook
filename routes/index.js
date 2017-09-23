@@ -12,4 +12,15 @@ router.get("/", (req, res, next) => {
   });
 });
 
+router.post("/add", (req, res, next) => {
+  console.log("POST...");
+  db.query("INSERT INTO recipes(name, ingredients, directions) VALUES($1, $2, $3)", 
+    [req.body.name, req.body.ingredients, req.body.directions], (err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+
 module.exports = router;
