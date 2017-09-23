@@ -1,5 +1,42 @@
 extends layout
 
 block content
+  button.btn.btn-primary.btn-block(data-toggle="modal", data-target="#formModal") Add Recipe
   each r in recipes    
-      =r.name
+      .well
+        h4=r.name 
+          button.btn.btn-default.pull-right(data-toggle="collapse", href="#recipe_"+r.id, aria-expanded="false", aria-controls="recipe_"+r.id)
+            span.glyphicon.glyphicon-triangle-bottom(aria-hidden="true")
+        .collapse(id="recipe_"+r.id)
+          p 
+            strong Ingredients: 
+            =r.ingredients
+          p 
+            strong Directions: 
+            =r.directions
+          button.btn.btn-default
+            span.glyphicon.glyphicon-edit(aria-hidden="true")
+          button.btn.btn-danger
+            span.glyphicon.glyphicon-remove(aria-hidden="true")
+  //- Add Form Modal
+  .modal.fade(id="formModal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+    .modal-dialog(role="document")
+      .modal-content
+        form(method="post" action="/add")
+          .modal-header
+            botton.close(data-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") &times;
+            h4.modal-title(id="myModalLabel") Add Recipe
+          .modal-body
+            .form-group
+              label Recipe Name
+              input.form-control(type="text" name="name")
+            .form-group
+              label Ingredients
+              input.form-control(type="text" name="ingredients")
+            .form-group
+              label Directions
+              input.form-control(type="text" name="directions")
+          .modal-footer
+            botton.btn.btn-default(data-dismiss="modal") Close
+            botton.btn.btn-primary Save Change
